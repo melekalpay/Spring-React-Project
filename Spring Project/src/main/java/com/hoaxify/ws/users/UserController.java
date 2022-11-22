@@ -1,6 +1,7 @@
 package com.hoaxify.ws.users;
 
 
+import com.hoaxify.ws.shared.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,12 +15,15 @@ import org.slf4j.Logger;
 
 @RestController
 public class UserController {
-
     @Autowired
-    UserRepository userRepository;
+    UserServis userServis;
+
     @PostMapping("api/1.0/users")
-    public void createuser(@RequestBody Users users){
-        userRepository.save(users);
+    public GenericResponse createUser(@RequestBody Users users){
+        userServis.save(users);
+        GenericResponse response=new GenericResponse();
+        response.setMessage("user created");
+        return response;
 
     }
 }
